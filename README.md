@@ -7,7 +7,10 @@ golang：优化读取struct内的tag值（只解析一次，以后都从缓存�
 =======
 ```
 package main
-import "github.com/coscms/tagfast"
+import (
+  "reflect"
+  "github.com/coscms/tagfast"
+)
 
 type Coscms struct {
   Url string `xorm:"not null default '' VARCHAR(255)" valid:"Requied" form_widget:"text"`
