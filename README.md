@@ -8,6 +8,7 @@ golang：优化读取struct内的tag值（只解析一次，以后都从缓存�
 ```
 package main
 import (
+  "fmt"
   "reflect"
   "github.com/coscms/tagfast"
 )
@@ -21,7 +22,16 @@ func main(){
   m:=Coscms{}
   t := reflect.TypeOf(m)
   for i := 0; i < t.NumField(); i++ {
+  
     widget:=tagfast.Tag(m,i,"form_widget")
+    fmt.Println("widget:",widget)
+    
+    valid:=tagfast.Tag(m,i,"valid")
+    fmt.Println("valid:",valid)
+    
+    xorm:=tagfast.Tag(m,i,"xorm")
+    fmt.Println("xorm:",xorm)
+    
   }
 }
 ```
