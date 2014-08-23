@@ -5,7 +5,8 @@ golang：优化读取struct内的tag值（只解析一次，以后都从缓存�
 
 用法
 =======
-```package main
+```
+package main
 import "github.com/coscms/tagfast"
 
 type Coscms struct {
@@ -19,4 +20,5 @@ func main(){
   for i := 0; i < t.NumField(); i++ {
     widget:=tagfast.Tag(m,i,"form_widget")
   }
-}```
+}
+```
