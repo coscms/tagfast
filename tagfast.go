@@ -31,7 +31,7 @@ func GetTag(struct_name string, field_name string) (r TagFast, ok bool) {
 	return
 }
 
-//usage: Tag(typ.Name(),typ.Field(i).Name,typ.Field(i).Tag,"form")
+//usage: Tag(m,i,"form")
 func Tag(i_struct interface{}, field_no int, key string) (tag string) {
 	t := reflect.TypeOf(i_struct)
 	if t.Field(field_no).Tag == "" {
