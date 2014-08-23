@@ -23,13 +23,13 @@ func main(){
   t := reflect.TypeOf(m)
   for i := 0; i < t.NumField(); i++ {
   
-    widget:=tagfast.Tag(m,i,"form_widget")
+    widget:=tagfast.Tag(t,i,"form_widget")
     fmt.Println("widget:",widget)
     
-    valid:=tagfast.Tag(m,i,"valid")
+    valid:=tagfast.Tag(t,i,"valid")
     fmt.Println("valid:",valid)
     
-    xorm:=tagfast.Tag(m,i,"xorm")
+    xorm:=tagfast.Tag(t,i,"xorm")
     fmt.Println("xorm:",xorm)
     
   }
