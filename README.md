@@ -19,17 +19,17 @@ type Coscms struct {
 }
 
 func main(){
-  m:=Coscms{}
+  m := Coscms{}
   t := reflect.TypeOf(m)
   for i := 0; i < t.NumField(); i++ {
-  
-    widget:=tagfast.Tag(t,i,"form_widget")
+    f := t.Field(i)
+    widget:=tagfast.Tag(t,f,"form_widget")
     fmt.Println("widget:",widget)
     
-    valid:=tagfast.Tag(t,i,"valid")
+    valid:=tagfast.Tag(t,f,"valid")
     fmt.Println("valid:",valid)
     
-    xorm:=tagfast.Tag(t,i,"xorm")
+    xorm:=tagfast.Tag(t,f,"xorm")
     fmt.Println("xorm:",xorm)
     
   }

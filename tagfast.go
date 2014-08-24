@@ -31,17 +31,33 @@ func GetTag(struct_name string, field_name string) (r TagFast, ok bool) {
 	return
 }
 
-//usage: Tag(t, i, "form")
-func Tag(t reflect.Type, field_no int, key string) (tag string) {
-	if t.Field(field_no).Tag == "" {
+//usage: Tag1(t, i, "form")
+func Tag1(t reflect.Type, field_no int, key string) (tag string) {
+	f := t.Field(field_no)
+	tag = Tag(t, f, key)
+	return
+}
+
+//usage: Tag2(t, "Id", "form")
+func Tag2(t reflect.Type, field_name string, key string) (tag string) {
+	f, ok := t.FieldByName(field_name)
+	if !ok {
 		return ""
 	}
-	if v, ok := GetTag(t.String(), t.Field(field_no).Name); ok {
+	tag = Tag(t, f, key)
+	return
+}
+
+func Tag(t reflect.Type, f reflect.StructField, key string) (tag string) {
+	if f.Tag == "" {
+		return ""
+	}
+	if v, ok := GetTag(t.String(), f.Name); ok {
 		tag = v.Get(key)
 	} else {
-		v := TagFast{Tag: t.Field(field_no).Tag}
+		v := TagFast{Tag: f.Tag}
 		tag = v.Get(key)
-		CacheTag(t.String(), t.Field(field_no).Name, v)
+		CacheTag(t.String(), f.Name, v)
 	}
 	return
 }
