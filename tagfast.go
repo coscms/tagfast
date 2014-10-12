@@ -150,16 +150,17 @@ func (a *TagFast) GetParsed(key string, fns ...func() interface{}) interface{} {
 	if a.Parsed == nil {
 		a.Parsed = make(map[string]interface{})
 	}
-	lock.Lock()
-	defer lock.Unlock()
+	lock.RLock()
 	if v, ok := a.Parsed[key]; ok {
+		lock.RUnlock()
 		return v
 	}
+	lock.RUnlock()
 	if len(fns) > 0 {
 		fn := fns[0]
 		if fn != nil {
 			v := fn()
-			a.Parsed[key] = v
+			a.SetParsed(key, v)
 			return v
 		}
 	}
